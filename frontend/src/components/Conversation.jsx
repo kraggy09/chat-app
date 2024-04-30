@@ -31,24 +31,26 @@ const Conversation = () => {
   ];
   return (
     <div className="max-h-[60vh] overflow-y-scroll">
-      <div className="mx-6 flex flex-col items-start gap-y-2">
+      <div className="min-w-full flex flex-col items-start lg:gap-y-2">
         {chat.map((per, index) => {
           return (
             <div
               onClick={() => setIdx(per.id)}
               key={per.id}
-              className="min-w-[450px] lg:min-w-[15vw]  flex items-start flex-col"
+              className="  hover:cursor-pointer min-w-full flex items-start flex-col"
             >
               <div
-                className={`flex items-center justify-start min-w-full gap-x-4 rounded-lg hover:bg-sky-500 hover:text-white  py-2 px-2 gap-y-4 ${
+                className={`flex items-center justify-start min-w-full gap-x-4 rounded-lg hover:bg-sky-500 hover:text-white  py-2 px-2 lg:gap-y-4 ${
                   per.id === idx ? "bg-sky-500 text-white" : ""
                 }`}
               >
-                <img src={per.url} className="h-16" alt="" />
-                <p className="font-semibold text-xl text-white">{per.name}</p>
+                <img src={per.url} className="h-12 lg:h-16" alt="" />
+                <p className="font-semibold lg:text-xl text-white">
+                  {per.name}
+                </p>
               </div>
               {index !== chat.length - 1 && (
-                <div className=" divider min-w-[450px] lg:min-w-[15vw] 	mt-0 mb-0 px-3"></div>
+                <div className=" divider  lg:min-w-[15vw] 	mt-0 mb-0 px-3"></div>
               )}
             </div>
           );

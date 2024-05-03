@@ -6,9 +6,12 @@ const SearchInput = () => {
       <input
         type="text"
         placeholder="Search"
-        className="input min-w-[80%]  my-2 mx-2 bg-white text-black  rounded-xl"
+        className="input lg:min-w-[75%]  my-2 mx-2 bg-white text-black  rounded-xl"
       />
-      <button type="submit" className="btn  btn-sky-500 rounded-xl text-white">
+      <button
+        type="submit"
+        className="bg-sky-500 px-4 py-4 rounded-xl text-white"
+      >
         <FaSearch />
       </button>
     </form>

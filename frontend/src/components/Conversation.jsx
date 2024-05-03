@@ -30,8 +30,8 @@ const Conversation = () => {
     },
   ];
   return (
-    <div className="max-h-[60vh] overflow-y-scroll">
-      <div className="min-w-full flex flex-col items-start lg:gap-y-2">
+    <div className="max-h-[60vh] overflow-y-scroll scrollbar-hide">
+      <div className="min-w-full flex flex-col items-start lg:gap-y-1">
         {chat.map((per, index) => {
           return (
             <div
@@ -44,8 +44,8 @@ const Conversation = () => {
                   per.id === idx ? "bg-sky-500 text-white" : ""
                 }`}
               >
-                <img src={per.url} className="h-12 lg:h-16" alt="" />
-                <p className="font-semibold lg:text-xl text-white">
+                <img src={per.url} className="h-12 lg:h-14" alt="" />
+                <p className="font-semibold lg:text-lg text-white">
                   {per.name}
                 </p>
               </div>

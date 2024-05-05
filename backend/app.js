@@ -16,5 +16,5 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api", router);
+app.use("/apiv1", router);
 export default app;

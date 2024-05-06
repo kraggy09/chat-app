@@ -11,9 +11,9 @@ const SignUp = () => {
     gender: "",
     confirmPassword: "",
   });
-  const { signUp } = useSignUp();
+  const { signUp, loading } = useSignUp();
   const navigate = useNavigate();
-  console.log(input);
+  // console.log(input);
   const confirmPassword = () => {
     if (input.confirmPassword === "") {
       return true;
@@ -23,7 +23,7 @@ const SignUp = () => {
 
   const handleSubmit = async () => {
     let res = await signUp(input);
-    return res;
+    // await console.log(res, "Res recievred");
   };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -179,7 +179,11 @@ const SignUp = () => {
           </a>
           <div>
             <button className="btn btn-block bg-blue-600 text-white font-semibold border-none btn-sm mt-2">
-              SignUp
+              {loading ? (
+                <span className="loading loading-dots loading-xl"></span>
+              ) : (
+                <span>SignUp</span>
+              )}
             </button>
           </div>
         </form>

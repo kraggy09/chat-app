@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 const Login = () => {
+  const { login, loading } = useLogin();
   const [input, setInput] = useState({
     username: "",
     password: "",
   });
+
+  const handleLogin = async () => {
+    await login(input);
+  };
   const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -17,6 +23,7 @@ const Login = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            handleLogin();
           }}
         >
           <div className="my-2">
@@ -69,7 +76,11 @@ const Login = () => {
           </a>
           <div>
             <button className="btn btn-block btn-sm border-none bg-sky-600 font-semibold mt-2">
-              Login
+              {loading ? (
+                <span className="loading loading-dots loading-xl"></span>
+              ) : (
+                <span>Login</span>
+              )}
             </button>
           </div>
         </form>

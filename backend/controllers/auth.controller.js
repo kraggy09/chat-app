@@ -52,7 +52,7 @@ export const signUpUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    let user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({
         msg: "username not found!! Kindly register yourself",
@@ -67,15 +67,16 @@ export const loginUser = async (req, res) => {
         msg: "Please check your password",
       });
     }
+    user = await User.findOne({ username }).select("-password");
     let token = await generateToken(user._id, res);
     return res.status(200).json({
       msg: "Login successfull",
       success: true,
-      token,
+      user,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: "Error logging in user",
+      msg: "Error logging in user" + error.message,
       error: error.message,
       success: false,
     });

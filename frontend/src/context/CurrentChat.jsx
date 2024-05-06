@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export const CurrentChat = createContext({});
 
@@ -10,6 +11,10 @@ const CurrentChatProvider = ({ children }) => {
       {children}
     </CurrentChat.Provider>
   );
+};
+
+CurrentChatProvider.propTypes = {
+  children: PropTypes.element,
 };
 
 export default CurrentChatProvider;

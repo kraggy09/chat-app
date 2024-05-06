@@ -14,7 +14,7 @@ const Home = () => {
         <div className="min-w-[43%] lg:min-w-[40%]">
           <SideBar />
         </div>
-        {!currentChat ? (
+        {currentChat ? (
           <MainChat />
         ) : (
           <div className="grid items-center justify-center min-w-[40vw]">

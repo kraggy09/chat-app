@@ -10,12 +10,13 @@ const useLogin = () => {
       toast.error("Please fill in all the details");
       return false;
     }
-
     return true;
   }
+
   const { setAuth } = useContext(Auth);
   const [loading, setLoading] = useState(false);
-  const endpoint = "/auth/login";
+  const endpoint = "auth/login";
+
   const login = async ({ username, password }) => {
     let fieldCheck = checkFields(username, password);
     if (!fieldCheck) {
@@ -23,10 +24,19 @@ const useLogin = () => {
     }
     setLoading(true);
     try {
-      const res = await axios.post(api + endpoint, {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        api + endpoint,
+        {
+          username,
+          password,
+        },
+        {
+          withCredentials: true, // Include credentials (cookies)
+          headers: {
+            "Content-Type": "application/json", // Specify content type
+          },
+        }
+      );
       if (res.data) {
         console.log(res.data);
         toast.success(res.data.msg);
@@ -40,6 +50,7 @@ const useLogin = () => {
       setLoading(false);
     }
   };
+
   return { login, loading };
 };
 

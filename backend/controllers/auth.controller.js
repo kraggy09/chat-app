@@ -69,6 +69,7 @@ export const loginUser = async (req, res) => {
     }
     user = await User.findOne({ username }).select("-password");
     let token = await generateToken(user._id, res);
+    console.log(token, "token generated");
     return res.status(200).json({
       msg: "Login successfull",
       success: true,

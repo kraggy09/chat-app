@@ -11,7 +11,7 @@ export const checkAuth = async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     if (!decoded) {
       return res.status(401).json({
-        error: "Unauthorize-- Inavlid token",
+        error: "Unauthorized Inavlid token",
         success: false,
         msg: "Bad Auth",
       });

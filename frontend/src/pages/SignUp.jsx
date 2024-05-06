@@ -22,8 +22,7 @@ const SignUp = () => {
   };
 
   const handleSubmit = async () => {
-    let res = await signUp(input);
-    // await console.log(res, "Res recievred");
+    await signUp(input);
   };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">

@@ -29,7 +29,8 @@ export const sendMessage = async (req, res) => {
     }
     return res.status(200).json({
       msg: "Message sent successfully",
-      success: false,
+      message: sentMessage,
+      success: true,
     });
   } catch (error) {
     return res.status(500).json({
@@ -45,6 +46,7 @@ export const getAllMessages = async (req, res) => {
   let senderId = req.senderId;
   senderId = new mongoose.Types.ObjectId(senderId);
   recieverId = new mongoose.Types.ObjectId(recieverId);
+  console.log(recieverId, senderId);
   const pipeline = [
     //Stage 1-----> Match all the documents with senderId or recieverId
 
@@ -84,14 +86,15 @@ export const getAllMessages = async (req, res) => {
   try {
     const result = await Message.aggregate(pipeline);
     if (result.length == 0) {
-      return res.status(404).json({
+      return res.status(300).json({
         msg: "No conversation found between them",
         success: true,
       });
     }
+    console.log(result[0].conversation);
     return res.status(200).json({
       msg: "Conversation found",
-      result,
+      messages: result[0].conversation,
       success: true,
     });
   } catch (error) {

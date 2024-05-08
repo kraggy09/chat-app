@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { api } from "../constant";
 import { Auth } from "../context/Auth";
 
 const useLogout = () => {
@@ -11,7 +10,16 @@ const useLogout = () => {
     const endpoint = "/auth/logout";
     setLoading(true);
     try {
-      const res = await axios.post(api + endpoint);
+      const res = await axios.post(
+        "/api/v1/" + endpoint,
+        {},
+        {
+          withCredentials: true, // Include credentials (cookies)
+          headers: {
+            "Content-Type": "application/json", // Specify content type
+          },
+        }
+      );
       localStorage.removeItem("user");
       setAuth(null);
 

@@ -10,7 +10,6 @@ const ChatHeader = ({ name, profile }) => {
           {name}
         </h1>
       </div>
-      <div className="divider "></div>
     </div>
   );
 };

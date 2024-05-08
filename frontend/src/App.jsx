@@ -4,10 +4,15 @@ import Login from "./pages/Login";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { Auth } from "./context/Auth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { CurrentChat } from "./context/CurrentChat";
 
 const App = () => {
   const { auth } = useContext(Auth);
+  const { setCurrentChat } = useContext(CurrentChat);
+  useEffect(() => {
+    setCurrentChat({ info: {}, messages: [] });
+  }, []);
 
   return (
     <div className="p-4 h-screen flex items-center justify-center">

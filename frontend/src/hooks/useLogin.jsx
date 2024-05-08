@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { api } from "../constant";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Auth } from "../context/Auth";
@@ -25,7 +24,7 @@ const useLogin = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        api + endpoint,
+        "/api/v1/" + endpoint,
         {
           username,
           password,
@@ -41,7 +40,7 @@ const useLogin = () => {
         console.log(res.data);
         toast.success(res.data.msg);
       }
-      setAuth(JSON.stringify(res?.data?.user));
+      setAuth(res?.data?.user);
       localStorage.setItem("user", JSON.stringify(res?.data?.user));
     } catch (error) {
       toast.error(error.message);

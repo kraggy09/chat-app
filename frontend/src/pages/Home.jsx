@@ -4,17 +4,17 @@ import SideBar from "../components/SideBar";
 import { CurrentChat } from "../context/CurrentChat";
 
 const Home = () => {
-  const { currentChat } = useContext(CurrentChat);
+  const { selectedChat } = useContext(CurrentChat);
   return (
     <div className="flex  md:h-[600px] lg:h-[630px]   min-w-[85vw] md:min-w-[90vw] lg:min-w-[70%] rounded-lg bg-gray-400 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50">
       <div className=" lg:min-w-[50%] md:hidden block min-w-[100%]  md:min-w-[45%]">
-        {currentChat ? <MainChat /> : <SideBar />}
+        {selectedChat ? <MainChat /> : <SideBar />}
       </div>
       <div className=" min-w-full hidden md:flex  gap-x-6 ">
         <div className="min-w-[43%] lg:min-w-[40%]">
           <SideBar />
         </div>
-        {currentChat ? (
+        {selectedChat ? (
           <MainChat />
         ) : (
           <div className="grid items-center justify-center min-w-[40vw]">

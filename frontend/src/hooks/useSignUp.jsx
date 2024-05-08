@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { api } from "../constant";
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import axios from "axios";
@@ -42,7 +41,7 @@ const useSignUp = () => {
     }
     setLoading(true);
     try {
-      const res = await axios.post(api + endpoint, {
+      const res = await axios.post("/api/v1/" + endpoint, {
         fullName,
         username,
         password,

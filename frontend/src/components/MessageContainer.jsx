@@ -10,11 +10,15 @@ const MessageContainer = () => {
   const ref = useRef();
   useEffect(() => {
     const scrollToBottom = () => {
-      ref.current.scrollTop = ref.current.scrollHeight;
+      ref.current.scrollTo({
+        top: ref.current.scrollHeight,
+        behavior: "smooth", // Add smooth behavior
+      });
     };
 
     scrollToBottom();
   }, [currentChat]);
+
   return (
     <div
       ref={ref}

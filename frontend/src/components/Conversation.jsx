@@ -3,17 +3,25 @@ import PropTypes from "prop-types";
 import { CurrentChat } from "../context/CurrentChat";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { SocketContext } from "../context/Socket";
+import useListenMessage from "../hooks/useListenMessage";
 
 const Conversation = ({ chat }) => {
-  const { currentChat, setSelectedChat, selectedChat, setCurrentChat } =
+  const { currentChat, setSelectedChat, setCurrentChat } =
     useContext(CurrentChat);
-  console.log(selectedChat);
-  // console.log(currentChat);
+  const { onlineUser } = useContext(SocketContext);
+
+  useListenMessage();
 
   return (
     <div className="max-h-[60vh] overflow-y-scroll scrollbar-hide">
       <div className="min-w-full flex flex-col items-start lg:gap-y-1">
         {chat?.map((per, index) => {
+          const isOnline = onlineUser.find((user) => per._id === user);
+
+          if (isOnline) {
+            // console.log("Yes we did it");
+          }
           return (
             <div
               onClick={async () => {
@@ -57,7 +65,16 @@ const Conversation = ({ chat }) => {
                   per._id === currentChat?._id ? "bg-sky-500 text-white" : ""
                 }`}
               >
-                <img src={per.profilepic} className="h-12 lg:h-14" alt="" />
+                <div className={`avatar  ${isOnline ? "online" : ""}`}>
+                  <div className="w-12 md:w-16 rounded-full">
+                    <img
+                      src={per.profilepic}
+                      className=""
+                      alt="user avatar
+                    "
+                    />
+                  </div>
+                </div>
                 <p className="font-semibold capitalize lg:text-lg text-white">
                   {per.fullName}
                 </p>

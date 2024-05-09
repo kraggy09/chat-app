@@ -57,7 +57,7 @@ const MainChat = () => {
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          className="flex min-w-full items-center gap-2"
+          className="flex mt-3 min-w-full items-center gap-2"
         >
           <input
             type="text"
@@ -67,7 +67,7 @@ const MainChat = () => {
               setNewMsg(change);
             }}
             placeholder="Search"
-            className="input lg:min-w-[90%]  my-2 mx-2 bg-white text-black  rounded-xl"
+            className="input md:min-w-[80%] xl:min-w-[90%]  my-2 mx-2 bg-white text-black  rounded-xl"
           />
           <button
             onClick={() => {

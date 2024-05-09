@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { getTime } from "../constant";
 const RecievedMessage = ({ message, profilePic }) => {
   return (
-    <div className="chat chat-start">
+    <div className={`chat chat-start ${message.shouldShake ? "shake" : ""}`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img alt="Tailwind CSS chat bubble component" src={profilePic} />

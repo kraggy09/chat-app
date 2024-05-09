@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js";
+import { getRecieverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
   const { message } = req.body;
@@ -27,6 +28,12 @@ export const sendMessage = async (req, res) => {
         msg: "Issue while creating message",
       });
     }
+    const recieverSocketId = getRecieverSocketId(recieverId);
+    if (recieverSocketId) {
+      // io.to is used to send events to a specific client
+      console.log(sentMessage);
+      io.to(recieverSocketId).emit("newMessage", sentMessage);
+    }
     return res.status(200).json({
       msg: "Message sent successfully",
       message: sentMessage,
@@ -46,7 +53,7 @@ export const getAllMessages = async (req, res) => {
   let senderId = req.senderId;
   senderId = new mongoose.Types.ObjectId(senderId);
   recieverId = new mongoose.Types.ObjectId(recieverId);
-  console.log(recieverId, senderId);
+  // console.log(recieverId, senderId);
   const pipeline = [
     //Stage 1-----> Match all the documents with senderId or recieverId
 
@@ -91,7 +98,7 @@ export const getAllMessages = async (req, res) => {
         success: true,
       });
     }
-    console.log(result[0].conversation);
+    // console.log(result[0].conversation);
     return res.status(200).json({
       msg: "Conversation found",
       messages: result[0].conversation,
